@@ -1,5 +1,18 @@
+const messages = [
+  {
+    text: "Hi there!",
+    user: "Amando",
+    added: new Date(),
+  },
+  {
+    text: "Hello World!",
+    user: "Charles",
+    added: new Date(),
+  },
+];
+
 async function getIndex(req, res) {
-  res.render("index");
+  res.render("index", { messages: messages });
 }
 
 async function getNewMessageForm(req, res) {

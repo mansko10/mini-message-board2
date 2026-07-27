@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Message</title>
+</head>
+<body>
+    <%- include("partials/nav.ejs") %>
+    <h1>Create New Message</h1>
+    <form action="new" method="post" class="messageForm">
+        <div class="form-item">
+            <label for="author">Author: </label>
+            <input type="text" class="author" id="author">
+        </div>
+        <div class="form-item">
+            <label for="message">Message: </label>
+            <textarea name="message" id="message"></textarea>
+        </div>
+        <div class="form-item">
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+</body>
+</html>

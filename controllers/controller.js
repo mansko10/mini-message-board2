@@ -1,10 +1,14 @@
+const generateId = require("../Utils/generateId");
+
 const messages = [
   {
+    id: 1,
     text: "Hi there!",
     user: "Amando",
     added: new Date(),
   },
   {
+    id: 2,
     text: "Hello World!",
     user: "Charles",
     added: new Date(),
@@ -22,6 +26,7 @@ async function getNewMessageForm(req, res) {
 async function postNewMessage(req, res) {
   console.log(req.body);
   messages.push({
+    id: generateId(),
     text: req.body.message,
     user: req.body.author,
     added: new Date(),

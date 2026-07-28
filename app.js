@@ -7,8 +7,12 @@ const router = require("./routers/router");
 // Create Express App
 const app = express();
 
+// Set view engine
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+
+// middleware to parse form data into req.body
+app.use(express.urlencoded({ extended: true }));
 
 app.use("/", router);
 

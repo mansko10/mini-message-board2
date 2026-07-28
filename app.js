@@ -14,7 +14,11 @@ app.set("views", path.join(__dirname, "views"));
 // middleware to parse form data into req.body
 app.use(express.urlencoded({ extended: true }));
 
+// Router
 app.use("/", router);
+
+// Handle 404
+app.use((req, res) => res.status(404).render("404"));
 
 app.listen(process.env.PORT, (err) => {
   if (err) {

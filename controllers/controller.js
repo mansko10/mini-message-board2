@@ -19,6 +19,16 @@ async function getIndex(req, res) {
   res.render("index", { messages: messages });
 }
 
+async function getMessage(req, res) {
+  const message = messages.find(
+    (message) => message.id === Number(req.params.id),
+  );
+
+  message
+    ? res.render("message", { message: message })
+    : res.render("messageNotFound");
+}
+
 async function getNewMessageForm(req, res) {
   res.render("newMessage");
 }
@@ -34,4 +44,9 @@ async function postNewMessage(req, res) {
   res.redirect("/");
 }
 
-module.exports = { getIndex, getNewMessageForm, postNewMessage };
+module.exports = {
+  getIndex,
+  getNewMessageForm,
+  postNewMessage,
+  getMessage,
+};

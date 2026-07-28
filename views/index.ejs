@@ -8,8 +8,10 @@
 <body>
     <%- include("partials/nav.ejs") %>
     <h1>All Messages</h1>
-    <% locals.messages.forEach(message => { %>
+    <div class="messages">
+        <% locals.messages.forEach(message => { %>
         <%- include("partials/message.ejs", {message: message}) %>
-    <% }) %>
+        <% }) %>
+    </div>
 </body>
 </html>

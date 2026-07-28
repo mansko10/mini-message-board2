@@ -11,6 +11,10 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+// Middleware to specify "public" folder
+const assetsPath = path.join(__dirname, "public");
+app.use(express.static(assetsPath));
+
 // middleware to parse form data into req.body
 app.use(express.urlencoded({ extended: true }));
 

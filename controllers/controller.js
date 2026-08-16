@@ -1,4 +1,6 @@
 const generateId = require("../Utils/generateId");
+const db = require("../db/queries");
+const { validationResult } = require("express-validator");
 
 const messages = [
   {
@@ -16,13 +18,12 @@ const messages = [
 ];
 
 async function getIndex(req, res) {
-  res.render("index", { messages: messages });
+  const dbmessages = await db.getAllMessages();
+  res.render("index", { messages: dbmessages });
 }
 
 async function getMessage(req, res) {
-  const message = messages.find(
-    (message) => message.id === Number(req.params.id),
-  );
+  const message = await db.getMessage(req.params.id);
 
   message
     ? res.render("message", { message: message })
@@ -34,14 +35,24 @@ async function getNewMessageForm(req, res) {
 }
 
 async function postNewMessage(req, res) {
-  console.log(req.body);
+  const errors = validationResult(req);
   messages.push({
     id: generateId(),
     text: req.body.message,
     user: req.body.author,
     added: new Date(),
   });
-  res.redirect("/");
+
+  if (!errors.isEmpty()) {
+    res.status(400).render("newMessage", {
+      errors: errors.array(),
+      message: req.body.message,
+      author: req.body.author,
+    });
+  } else {
+    await db.addMessage(req.body.author, req.body.message);
+    res.redirect("/");
+  }
 }
 
 module.exports = {

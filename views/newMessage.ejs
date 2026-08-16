@@ -4,14 +4,21 @@
 <body>
     <%- include("partials/nav.ejs") %>
     <h1>Create New Message</h1>
+    <% if (locals.errors) { %>
+        <ul>
+            <% locals.errors.forEach((error) => { %>
+                <li><%= error.msg %></li>
+            <% }) %>
+        </ul>
+    <% } %>
     <form action="/new" method="post" class="messageForm">
         <div class="form-item">
             <label for="author">Author: </label>
-            <input type="text" class="author" name="author" id="author">
+            <input type="text" class="author" name="author" id="author" value="<%= locals.author ? locals.author : "" %>">
         </div>
         <div class="form-item">
             <label for="message">Message: </label>
-            <textarea name="message" id="message"></textarea>
+            <textarea name="message" id="message"><%= locals.message ? locals.message : "" %></textarea>
         </div>
         <div class="form-item">
             <button type="submit">Submit</button>
